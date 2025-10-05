@@ -51,6 +51,14 @@ public class IoController {
         return ResponseEntity.status(HttpStatus.OK).body(fileInfoList);
     }
 
-
+    @DeleteMapping(value = "/name/{name}")
+    public ResponseEntity<?> deleteFileByName(@PathVariable String name){
+        try {
+            service.deleteByName(name);
+            return ResponseEntity.ok(new ResponseMessage("file deleted"));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Could not delete File" + e.getMessage());
+        }
+    }
 
 }
